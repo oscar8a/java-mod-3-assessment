@@ -1,11 +1,13 @@
 import java.io.File;
 import java.io.IOException;
 
-import hospitalbuilderservices.DoctorBuilderServices;
-import hospitalbuilderservices.HospitalBuilderServices;
-import hospitalbuilderservices.PatientBuilderServices;
-import hospitalobjects.Hospital;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import inputservices.*;
+import hospitalbuilderservices.*;
+import hospitalobjects.Hospital;
+
 
 public class HospitalWorldRunner {
     private static String hospitalJSONFileName = "";
@@ -79,5 +81,12 @@ public class HospitalWorldRunner {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+    }
+
+    // Add writeJson function to set up project dependencies and test file writing
+    public static void writeJson(Object someObject) throws JsonProcessingException {
+
+        String json = new ObjectMapper().writeValueAsString(someObject);
+        System.out.println(json);
     }
 }
