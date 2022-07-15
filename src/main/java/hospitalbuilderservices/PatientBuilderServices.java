@@ -11,8 +11,9 @@ public class PatientBuilderServices {
     private UserInputService userInputService;
     private UserOutputService userOutputService;
 
-    public PatientBuilderServices(UserInputService userInputService) {
+    public PatientBuilderServices(UserInputService userInputService, UserOutputService userOutputService) {
         this.userInputService = userInputService;
+        this.userOutputService = userOutputService;
     }
 
 
@@ -24,17 +25,19 @@ public class PatientBuilderServices {
     }
 
     public Ailment createAilment() {
-        userOutputService.printMessage("[1.Cold]  [2.Skin Rash]  [3.Broken Bone]");
+        userOutputService.printMessage("[1.Cold]  [2.Skin Rash]  [3.Broken Bone]  [4.Something Else]");
         int ailmentOption = userInputService.getUserIntInput("What's the patient's symptom? (Choose from options)");
 
         switch (ailmentOption) {
             case 1:
-                return new Ailment("Cold", "Pediatrics", 70);
+                return new Ailment("Cold", "Pediatrics", 70, true);
             case 2:
-                return new Ailment("Skin Rash", "Dermatology", 70);
+                return new Ailment("Skin Rash", "Dermatology", 70, true);
             case 3:
+                return new Ailment("Broken Bone", "Orthopedics", 70, true);
+            case 4:
             default:
-                return new Ailment("Broken Bone", "Orthopedics", 70);
+                return new Ailment("unknown", "Internal Medicine", 10, false);
         }
     }
 }

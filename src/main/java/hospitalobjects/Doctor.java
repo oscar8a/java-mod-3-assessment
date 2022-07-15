@@ -5,11 +5,11 @@ import java.util.List;
 
 public class Doctor {
     String name;
-    String specialty;
+    Specialty specialty;
     int healingIndex;
     List<Patient> patientList;
 
-    public Doctor(String inputName, String inputSpecialty, int inputHealingIndex) {
+    public Doctor(String inputName, Specialty inputSpecialty, int inputHealingIndex) {
         name = inputName;
         specialty = inputSpecialty;
         healingIndex = inputHealingIndex;
@@ -20,7 +20,7 @@ public class Doctor {
         return name;
     }
 
-    public String getSpecialty() {
+    public Specialty getSpecialty() {
         return specialty;
     }
 
@@ -30,5 +30,20 @@ public class Doctor {
 
     public List<Patient> getPatientList() {
         return patientList;
+    }
+
+    public void addPatient(Patient patient) {
+        patientList.add(patient);
+    }
+
+    public double calculateTreatmentsUntilCured(Patient patient) {
+        int patientHealth = patient.getPatientHealthIndex();
+        int difference = 100 - patientHealth;
+
+        return (double) difference / healingIndex;
+    }
+
+    public boolean isPatientCurable(Patient patient) {
+        return calculateTreatmentsUntilCured(patient) < specialty.getNumberOfTreatmentsToCure();
     }
 }

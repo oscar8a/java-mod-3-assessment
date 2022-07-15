@@ -1,5 +1,7 @@
 package hospitalobjects;
 
+import inputservices.UserOutputService;
+
 import java.util.*;
 
 public class Hospital {
@@ -8,7 +10,7 @@ public class Hospital {
 
     public Hospital(String nameInput) {
         name = nameInput;
-        specialtyDirectory = new HashMap<String, List<Doctor>>();
+        specialtyDirectory = new HashMap<>();
     }
 
     public HashMap<String, List<Doctor>> getSpecialtyDirectory() {
@@ -19,23 +21,33 @@ public class Hospital {
         return name;
     }
 
-    public void addDoctor(Doctor doctor) {
-        if (specialtyDirectory.containsKey(doctor.getSpecialty())) {
-            List<Doctor> withSpecialty = specialtyDirectory.get(doctor.getSpecialty());
+    public void addDoctor(Doctor doctor, UserOutputService userOutputService) {
+        // put doctor specialty title in a string variable for readability
+        String doctorSpecialty = doctor.getSpecialty().getTitle();
+
+        if (specialtyDirectory.containsKey(doctorSpecialty)) {
+            List<Doctor> withSpecialty = specialtyDirectory.get(doctorSpecialty);
             withSpecialty.add(doctor);
         } else {
             List<Doctor> doctors = new ArrayList<>();
             doctors.add(doctor);
-            specialtyDirectory.put(doctor.getSpecialty(), doctors);
+            specialtyDirectory.put(doctorSpecialty, doctors);
         }
     }
 
-    public void addPatient(Patient patient) {
+    public void addPatient(Patient patient, UserOutputService userOutputService) {
         // Query Hospital Directory, for a List of Doctors for respective specialty
-        List<Doctor> doctorMatchList = specialtyDirectory.get(patient.getMyDisease().getName());
+        List<Doctor> doctorMatchList = specialtyDirectory.get(patient.getPatientAilment().getAssociatedSpecialty());
 
-        // Choose a Doctor
+        // Reject patient if no Doctor for their needs exist
+        if (doctorMatchList == null) {
+            userOutputService.printMessage("Unable to service this patient... No doctor with appropriate specialty available");
+            return;
+        }
+
+        // Choose a Doctor that is available, and match with patient
         Doctor matchedDoctor = findDoctorWithShortestListOfPatients(doctorMatchList);
+        matchedDoctor.addPatient(patient);
     }
 
     private Doctor findDoctorWithShortestListOfPatients(List<Doctor> doctors) {
@@ -49,8 +61,6 @@ public class Hospital {
         }
         return chosenDoctor;
     }
-
-
 
     public void printOutHospitalWorld() {
         System.out.println("\n\n%%%%%%%%%%%%%%%%% Hospital " + getHospitalName() + " %%%%%%%%%%%%%%%%%\n");
@@ -73,7 +83,7 @@ public class Hospital {
         if (patientList.isEmpty()) System.out.println("           + Doctor has no patients");
 
         for (Patient patient : patientList) {
-            System.out.println("           + " + patient.getName() + " " + patient.getMyDisease().getName());
+            System.out.println("           + " + patient.getName() + " " + patient.getPatientAilment().getName());
         }
     }
 }

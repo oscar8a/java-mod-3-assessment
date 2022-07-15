@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,17 +30,22 @@ public class HospitalWorldRunner {
                 userOutputService.printMessage("Starting HospitalWorldRunner...");
 
                 // Instantiate Hospital Builder Services
-                DoctorBuilderServices doctorBuilderService = new DoctorBuilderServices(userInputService);
-                PatientBuilderServices patientBuilderService = new PatientBuilderServices(userInputService);
-                HospitalBuilderServices hospitalBuilderService = new HospitalBuilderServices(userInputService, doctorBuilderService, patientBuilderService);
+                DoctorBuilderServices doctorBuilderService = new DoctorBuilderServices(userInputService, userOutputService);
+                PatientBuilderServices patientBuilderService = new PatientBuilderServices(userInputService, userOutputService);
+                HospitalBuilderServices hospitalBuilderService = new HospitalBuilderServices(userInputService, doctorBuilderService, patientBuilderService, userOutputService);
 
                 // Create Hospital *This is where heavy input code runs*
                 Hospital userHospital = hospitalBuilderService.createHospital();
 
+                //SKIP TO HERE, to load hospital directory from file
+//                Hospital restoredHospital = new ObjectMapper().readValue(new File(hospitalJSONFileName), Hospital.class);
+
                 // Print Out Hospital World
                 userHospital.printOutHospitalWorld();
+//                restoredHospital.printOutHospitalWorld();
 
-
+                // Print as JSON
+                writeJson(userHospital.getSpecialtyDirectory());
 
 
 
@@ -82,9 +88,34 @@ public class HospitalWorldRunner {
         }
     }
 
-    // Add writeJson function to set up project dependencies and test file writing
-    public static void writeJson(Object someObject) throws JsonProcessingException {
+//     Add writeJson function to set up project dependencies and test file writing
+    public static void writeJson(Object someObject) throws IOException {
         String json = new ObjectMapper().writeValueAsString(someObject);
+
+        // single line JSON
         System.out.println(json);
+
+        // formatted JSON
+        String newJson = "";
+        for (String s : json.split("},")) {
+            newJson += s + "}\n";
+        }
+        System.out.println("Formatted JSON:\n" + newJson);
+
+        //Write JSON File
+        writeToFile("oscarfile", json);
+    }
+
+    public static void writeToFile(String fileName, String text) throws IOException {
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter(fileName);
+            fileWriter.write(text);
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        } finally {
+            if (fileWriter != null)
+                fileWriter.close();
+        }
     }
 }

@@ -12,7 +12,7 @@ not change or get worse with each treatment.
 Create a virtual world with the appropriate relationships between a Hospital,
 Doctors and Patients
 
-**Main Requirements**:
+**HospitalWorldRunner Requirements**:
 
 - The system should create a Hospital with a name property provided by the
   user.
@@ -42,7 +42,7 @@ Doctors and Patients
 
 ## Current Project Requirements
 
-**Main Requirements**:
+**HospitalWorldRunner Requirements**:
 
 - Each doctor specialty has the following properties:
   - Number of treatments required to be fully cured.

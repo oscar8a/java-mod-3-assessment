@@ -1,20 +1,22 @@
 package hospitalbuilderservices;
 
 import hospitalobjects.*;
-import inputservices.UserInputService;
+import inputservices.*;
 
 public class HospitalBuilderServices {
     private UserInputService userInputService;
+    private UserOutputService userOutputService;
     private DoctorBuilderServices doctorBuilderService;
     private PatientBuilderServices patientBuilderService;
     private static final int NUMBER_OF_DOCTORS = 3;
     private static final int NUMBER_OF_PATIENTS = 5;
 
     public HospitalBuilderServices(UserInputService userInputService, DoctorBuilderServices doctorBuilderService,
-                                  PatientBuilderServices patientBuilderService) {
+                                  PatientBuilderServices patientBuilderService, UserOutputService userOutputService) {
         this.userInputService = userInputService;
         this.doctorBuilderService = doctorBuilderService;
         this.patientBuilderService = patientBuilderService;
+        this.userOutputService = userOutputService;
     }
 
     public Hospital createHospital() {
@@ -23,11 +25,11 @@ public class HospitalBuilderServices {
 
         for (int i = 0; i < NUMBER_OF_DOCTORS; i++) {
             Doctor doctor = doctorBuilderService.createDoctor();
-            hospital.addDoctor(doctor);
+            hospital.addDoctor(doctor, userOutputService);
         }
         for (int i = 0; i < NUMBER_OF_PATIENTS; i++) {
             Patient patient = patientBuilderService.createPatient();
-            hospital.addPatient(patient);
+            hospital.addPatient(patient, userOutputService);
         }
         return hospital;
     }
