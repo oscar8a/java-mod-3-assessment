@@ -1,6 +1,9 @@
 import java.io.File;
 import java.io.IOException;
 
+import hospitalbuilderservices.DoctorBuilderServices;
+import hospitalbuilderservices.HospitalBuilderServices;
+import hospitalbuilderservices.PatientBuilderServices;
 import hospitalobjects.Hospital;
 import inputservices.*;
 
@@ -25,6 +28,21 @@ public class HospitalWorldRunner {
                 Hospital userHospital = new Hospital(userInputService.getUserStringInput("Please enter a name for your Hospital"));
 
                 userOutputService.printMessage("Your Hospital Name is " + userHospital.getHospitalName());
+
+                // Instantiate Hospital Builder Services
+                DoctorBuilderServices doctorBuilderService = new DoctorBuilderServices(userInputService);
+                PatientBuilderServices patientBuilderService = new PatientBuilderServices(userInputService);
+                HospitalBuilderServices hospitalBuilderService = new HospitalBuilderServices(userInputService, doctorBuilderService, patientBuilderService);
+
+                // Create Hospital (Move previous code here)
+
+
+
+
+
+
+
+
                 // run once for now
                 keepProgramRunning = false;
             }
@@ -42,8 +60,7 @@ public class HospitalWorldRunner {
 
         if (!new File(hospitalJSONFileName).exists()) {
             System.out.println("Can't Open File, it does not exist...");
-            System.out.println("Do You Wish to create a new file?");
-
+            System.out.println("New File will be created with name " + hospitalJSONFileName);
 
             createNewFile(hospitalJSONFileName);
         }
