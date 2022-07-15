@@ -1,10 +1,13 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import hospitalobjects.Doctor;
 import inputservices.*;
 import hospitalbuilderservices.*;
 import hospitalobjects.Hospital;
@@ -30,22 +33,22 @@ public class HospitalWorldRunner {
                 userOutputService.printMessage("Starting HospitalWorldRunner...");
 
                 // Instantiate Hospital Builder Services
-                DoctorBuilderServices doctorBuilderService = new DoctorBuilderServices(userInputService, userOutputService);
-                PatientBuilderServices patientBuilderService = new PatientBuilderServices(userInputService, userOutputService);
-                HospitalBuilderServices hospitalBuilderService = new HospitalBuilderServices(userInputService, doctorBuilderService, patientBuilderService, userOutputService);
+//                DoctorBuilderServices doctorBuilderService = new DoctorBuilderServices(userInputService, userOutputService);
+//                PatientBuilderServices patientBuilderService = new PatientBuilderServices(userInputService, userOutputService);
+//                HospitalBuilderServices hospitalBuilderService = new HospitalBuilderServices(userInputService, doctorBuilderService, patientBuilderService, userOutputService);
 
                 // Create Hospital *This is where heavy input code runs*
-                Hospital userHospital = hospitalBuilderService.createHospital();
+//                Hospital userHospital = hospitalBuilderService.createHospital();
 
                 //SKIP TO HERE, to load hospital directory from file
-//                Hospital restoredHospital = new ObjectMapper().readValue(new File(hospitalJSONFileName), Hospital.class);
+                Hospital restoredHospital = new ObjectMapper().readValue(new File(hospitalJSONFileName), Hospital.class);
 
                 // Print Out Hospital World
-                userHospital.printOutHospitalWorld();
-//                restoredHospital.printOutHospitalWorld();
+//                userHospital.printOutHospitalWorld();
+                restoredHospital.printOutHospitalWorld();
 
                 // Print as JSON
-                writeJson(userHospital.getSpecialtyDirectory());
+//                writeJson(userHospital);
 
 
 

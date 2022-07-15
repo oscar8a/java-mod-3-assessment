@@ -1,8 +1,8 @@
 package hospitalobjects;
 
 public class Patient {
-    private final String name;
-    private final Ailment patientAilment;
+    private String name;
+    private Ailment patientAilment;
     private int patientHealthIndex;
 
     public Patient(String nameInput, Ailment diseaseInput){
@@ -13,6 +13,9 @@ public class Patient {
 
     public String getName() {
         return name;
+    }
+
+    public Patient() {
     }
 
     public void setPatientHealthIndex(int patientHealthIndex) {

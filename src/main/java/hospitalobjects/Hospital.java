@@ -5,7 +5,7 @@ import inputservices.UserOutputService;
 import java.util.*;
 
 public class Hospital {
-    private final String name;
+    private String name;
     private HashMap<String, List<Doctor>> specialtyDirectory;
 
     public Hospital(String nameInput) {
@@ -13,11 +13,14 @@ public class Hospital {
         specialtyDirectory = new HashMap<>();
     }
 
+    public Hospital() {
+    }
+
     public HashMap<String, List<Doctor>> getSpecialtyDirectory() {
         return specialtyDirectory;
     }
 
-    public String getHospitalName() {
+    public String getName() {
         return name;
     }
 
@@ -63,7 +66,7 @@ public class Hospital {
     }
 
     public void printOutHospitalWorld() {
-        System.out.println("\n\n%%%%%%%%%%%%%%%%% Hospital " + getHospitalName() + " %%%%%%%%%%%%%%%%%\n");
+        System.out.println("\n\n%%%%%%%%%%%%%%%%% Hospital " + getName() + " %%%%%%%%%%%%%%%%%\n");
 
         System.out.println("### Hospital Specialty Departments and Staff and respective Patients ###");
         for (Map.Entry<String, List<Doctor>> specialtyDepartment : getSpecialtyDirectory().entrySet()) {

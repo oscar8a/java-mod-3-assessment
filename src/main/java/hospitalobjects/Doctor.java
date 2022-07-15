@@ -16,6 +16,9 @@ public class Doctor {
         patientList = new ArrayList<>();
     }
 
+    public Doctor() {
+    }
+
     public String getName() {
         return name;
     }

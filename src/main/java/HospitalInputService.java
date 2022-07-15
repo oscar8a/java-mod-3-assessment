@@ -26,6 +26,12 @@ public class HospitalInputService implements UserInputService {
         if (input.isBlank()) {
             return getUserIntInput(prompt);
         }
+        try {
+            int i = Integer.parseInt(input);
+        } catch (NumberFormatException nfe) {
+            return getUserIntInput(prompt);
+        }
+
         return Integer.parseInt(input);
     }
 
