@@ -27,18 +27,17 @@ public class HospitalWorldRunner {
 
             while (keepProgramRunning) {
                 userOutputService.printMessage("Starting HospitalWorldRunner...");
-                Hospital userHospital = new Hospital(userInputService.getUserStringInput("Please enter a name for your Hospital"));
-
-                userOutputService.printMessage("Your Hospital Name is " + userHospital.getHospitalName());
 
                 // Instantiate Hospital Builder Services
                 DoctorBuilderServices doctorBuilderService = new DoctorBuilderServices(userInputService);
                 PatientBuilderServices patientBuilderService = new PatientBuilderServices(userInputService);
                 HospitalBuilderServices hospitalBuilderService = new HospitalBuilderServices(userInputService, doctorBuilderService, patientBuilderService);
 
-                // Create Hospital (Move previous code here)
+                // Create Hospital *This is where heavy input code runs*
+                Hospital userHospital = hospitalBuilderService.createHospital();
 
-
+                // Print Out Hospital World
+                userHospital.printOutHospitalWorld();
 
 
 

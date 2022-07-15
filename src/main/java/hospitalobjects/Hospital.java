@@ -1,9 +1,6 @@
 package hospitalobjects;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Hospital {
     private final String name;
@@ -51,5 +48,32 @@ public class Hospital {
             }
         }
         return chosenDoctor;
+    }
+
+
+
+    public void printOutHospitalWorld() {
+        System.out.println("\n\n%%%%%%%%%%%%%%%%% Hospital " + getHospitalName() + " %%%%%%%%%%%%%%%%%\n");
+
+        System.out.println("### Hospital Specialty Departments and Staff and respective Patients ###");
+        for (Map.Entry<String, List<Doctor>> specialtyDepartment : getSpecialtyDirectory().entrySet()) {
+
+            System.out.println("  **** " + specialtyDepartment.getKey() + " ****");
+
+            List<Doctor> departmentDoctors = specialtyDepartment.getValue();
+            for (Doctor doctor : departmentDoctors) {
+                System.out.println("    ===> " + doctor.getName());
+                printPatientList(doctor.getPatientList());
+            }
+
+        }
+    }
+
+    public void printPatientList(List<Patient> patientList) {
+        if (patientList.isEmpty()) System.out.println("           + Doctor has no patients");
+
+        for (Patient patient : patientList) {
+            System.out.println("           + " + patient.getName() + " " + patient.getMyDisease().getName());
+        }
     }
 }

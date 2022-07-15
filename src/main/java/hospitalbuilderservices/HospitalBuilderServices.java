@@ -18,8 +18,9 @@ public class HospitalBuilderServices {
     }
 
     public Hospital createHospital() {
-        String name = userInputService.getUserStringInput("What's the hospital name?");
+        String name = userInputService.getUserStringInput("Please enter a name for your Hospital");
         Hospital hospital = new Hospital(name);
+
         for (int i = 0; i < NUMBER_OF_DOCTORS; i++) {
             Doctor doctor = doctorBuilderService.createDoctor();
             hospital.addDoctor(doctor);
@@ -29,7 +30,6 @@ public class HospitalBuilderServices {
             hospital.addPatient(patient);
         }
         return hospital;
-
     }
 
     // Create a method that builds hospital with all the doctors and patients
