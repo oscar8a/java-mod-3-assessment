@@ -1,21 +1,40 @@
 package hospitalbuilderservices;
 
+import hospitalobjects.Ailment;
+import hospitalobjects.AilmentEnum;
 import hospitalobjects.Patient;
-import inputservices.UserInputService;
+import inputservices.*;
+
+import java.util.Arrays;
+
 public class PatientBuilderServices {
     private UserInputService userInputService;
+    private UserOutputService userOutputService;
 
     public PatientBuilderServices(UserInputService userInputService) {
         this.userInputService = userInputService;
     }
 
+
     public Patient createPatient() {
         String name = userInputService.getUserStringInput("What's the patient's name?");
-        String specialty = userInputService.getUserStringInput("What's the patient's specialty?");
+        Ailment patientAilment = createAilment();
 
-        // Edit Patient creation to have appropriate Ailment
-//        Patient patient = new Patient(name);
-//        return patient;
-        return null;
+        return new Patient(name, patientAilment);
+    }
+
+    public Ailment createAilment() {
+        userOutputService.printMessage("[1.Cold]  [2.Skin Rash]  [3.Broken Bone]");
+        int ailmentOption = userInputService.getUserIntInput("What's the patient's symptom? (Choose from options)");
+
+        switch (ailmentOption) {
+            case 1:
+                return new Ailment("Cold", "Pediatrics", 70);
+            case 2:
+                return new Ailment("Skin Rash", "Dermatology", 70);
+            case 3:
+            default:
+                return new Ailment("Broken Bone", "Orthopedics", 70);
+        }
     }
 }

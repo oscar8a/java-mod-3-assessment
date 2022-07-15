@@ -9,4 +9,11 @@ public class Patient {
         myDisease = diseaseInput;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Ailment getMyDisease() {
+        return myDisease;
+    }
 }

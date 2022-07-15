@@ -34,6 +34,22 @@ public class Hospital {
     }
 
     public void addPatient(Patient patient) {
-        // add functionality appropriately
+        // Query Hospital Directory, for a List of Doctors for respective specialty
+        List<Doctor> doctorMatchList = specialtyDirectory.get(patient.getMyDisease().getName());
+
+        // Choose a Doctor
+        Doctor matchedDoctor = findDoctorWithShortestListOfPatients(doctorMatchList);
+    }
+
+    private Doctor findDoctorWithShortestListOfPatients(List<Doctor> doctors) {
+        Doctor chosenDoctor = null;
+        for (Doctor doctor : doctors) {
+            if (chosenDoctor == null) {
+                chosenDoctor = doctor;
+            } else if (chosenDoctor.getPatientList().size() > doctor.getPatientList().size()) {
+                chosenDoctor = doctor;
+            }
+        }
+        return chosenDoctor;
     }
 }

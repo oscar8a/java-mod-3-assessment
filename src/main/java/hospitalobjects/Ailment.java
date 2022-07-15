@@ -5,9 +5,13 @@ public class Ailment {
     String associatedSpecialty;
     int healthIndex;
 
-    public Ailment(String inputName, String inputAssociatedSpecialty, int inputHealthIndex) {
-        name = inputName;
+    public Ailment(String diseaseName, String inputAssociatedSpecialty, int inputHealthIndex) {
+        name = diseaseName;
         associatedSpecialty = inputAssociatedSpecialty;
         healthIndex = inputHealthIndex;
+    }
+
+    public String getName() {
+        return name;
     }
 }
