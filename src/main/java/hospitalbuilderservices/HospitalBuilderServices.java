@@ -1,5 +1,6 @@
 package hospitalbuilderservices;
 
+import hospitalobjects.*;
 import inputservices.UserInputService;
 
 public class HospitalBuilderServices {
@@ -14,6 +15,21 @@ public class HospitalBuilderServices {
         this.userInputService = userInputService;
         this.doctorBuilderService = doctorBuilderService;
         this.patientBuilderService = patientBuilderService;
+    }
+
+    public Hospital createHospital() {
+        String name = userInputService.getUserStringInput("What's the hospital name?");
+        Hospital hospital = new Hospital(name);
+        for (int i = 0; i < NUMBER_OF_DOCTORS; i++) {
+            Doctor doctor = doctorBuilderService.createDoctor();
+            hospital.addDoctor(doctor);
+        }
+        for (int i = 0; i < NUMBER_OF_PATIENTS; i++) {
+            Patient patient = patientBuilderService.createPatient();
+            hospital.addPatient(patient);
+        }
+        return hospital;
+
     }
 
     // Create a method that builds hospital with all the doctors and patients

@@ -12,7 +12,10 @@ public class PatientBuilderServices {
     public Patient createPatient() {
         String name = userInputService.getUserStringInput("What's the patient's name?");
         String specialty = userInputService.getUserStringInput("What's the patient's specialty?");
-        Patient patient = new Patient(name);
-        return patient;
+
+        // Edit Patient creation to have appropriate Ailment
+//        Patient patient = new Patient(name);
+//        return patient;
+        return null;
     }
 }

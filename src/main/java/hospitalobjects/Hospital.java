@@ -1,7 +1,9 @@
 package hospitalobjects;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class Hospital {
     private final String name;
@@ -18,5 +20,20 @@ public class Hospital {
 
     public String getHospitalName() {
         return name;
+    }
+
+    public void addDoctor(Doctor doctor) {
+        if (specialtyDirectory.containsKey(doctor.getSpecialty())) {
+            List<Doctor> withSpecialty = specialtyDirectory.get(doctor.getSpecialty());
+            withSpecialty.add(doctor);
+        } else {
+            List<Doctor> doctors = new ArrayList<>();
+            doctors.add(doctor);
+            specialtyDirectory.put(doctor.getSpecialty(), doctors);
+        }
+    }
+
+    public void addPatient(Patient patient) {
+        // add functionality appropriately
     }
 }

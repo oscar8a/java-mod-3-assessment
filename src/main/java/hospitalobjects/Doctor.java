@@ -15,4 +15,20 @@ public class Doctor {
         healingIndex = inputHealingIndex;
         patientList = new ArrayList<>();
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSpecialty() {
+        return specialty;
+    }
+
+    public int getHealingIndex() {
+        return healingIndex;
+    }
+
+    public List<Patient> getPatientList() {
+        return patientList;
+    }
 }

@@ -85,7 +85,6 @@ public class HospitalWorldRunner {
 
     // Add writeJson function to set up project dependencies and test file writing
     public static void writeJson(Object someObject) throws JsonProcessingException {
-
         String json = new ObjectMapper().writeValueAsString(someObject);
         System.out.println(json);
     }
