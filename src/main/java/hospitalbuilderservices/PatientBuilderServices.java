@@ -32,9 +32,9 @@ public class PatientBuilderServices {
             case 1:
                 return new Ailment("Cold", "Pediatrics", 70, true);
             case 2:
-                return new Ailment("Skin Rash", "Dermatology", 70, true);
+                return new Ailment("Skin Rash", "Dermatology", 65, true);
             case 3:
-                return new Ailment("Broken Bone", "Orthopedics", 70, true);
+                return new Ailment("Broken Bone", "Orthopedics", 60, true);
             case 4:
             default:
                 return new Ailment("unknown", "Internal Medicine", 10, false);

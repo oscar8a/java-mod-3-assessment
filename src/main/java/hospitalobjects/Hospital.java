@@ -86,7 +86,7 @@ public class Hospital {
         if (patientList.isEmpty()) System.out.println("           + Doctor has no patients");
 
         for (Patient patient : patientList) {
-            System.out.println("           + " + patient.getName() + " " + patient.getPatientAilment().getName());
+            System.out.println("           + " + patient.getName() + " = has = " + patient.getPatientAilment().getName() + " health: " + patient.getPatientHealthIndex());
         }
     }
 }
